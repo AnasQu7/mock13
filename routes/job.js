@@ -5,7 +5,7 @@ const JobModel = require('../models/job.model')
 
 
 router.get("/", async (req, res) => {
-    const {contract,q,location} = req.query
+    const {contract,q,location,position} = req.query
    
     try{
             
@@ -16,6 +16,9 @@ router.get("/", async (req, res) => {
             }
             if(location){
                 jobs = jobs.filter((e)=>e.Location === location)
+            }
+            if(position){
+                jobs = jobs.filter((e)=>e.Position === position)
             }
             if(q){
                 jobs = await JobModel.find(
